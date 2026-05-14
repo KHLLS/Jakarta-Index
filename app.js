@@ -1,58 +1,77 @@
 const rl = require('readline-sync');
 const Database = require('./src/Database');
-const ProductModel = require('./src/ProductModel');
+// const PropertyMenu = require('./src/menu_cli/PropertyMenu');
+// const AnalyticsMenu = require('./src/menu_cli/AnalyticsMenu');
+// const AgentMenu = require('./src/menu_cli/AgentMenu');
+// const LocationMenu = require('./src/menu_cli/LocationMenu');
 const mongodb = require('mongodb');
 
 async function main() {
-    const db = new Database();
-    const pm = new ProductModel();
-    await db.connect();
+    // const db = new Database();
+    // const pm = new PropertyMenu();
+    // const anm = new AnalyticsMenu();
+    // const agm = new AgentMenu();
+    // const lm = new LocationMenu();
+    // await db.connect();
     
     while (true) {
-
-        console.log('MongoDB Demo Application using CLI\n');
-        console.log('1. Tampilkan semua produk\n2. Tambah produk\n3. Update\n4. Hapus Data\n5. Keluar');
+        console.clear()
+        console.log('Jakarta Property Index Menu:\n1. Property Explorer\n2. Property Detail\n3. Market Analytics\n4. Data Management\n5. Exit');
         const pilih = await rl.question('Pilih menu: ');
-        
+        switch (pilih) {
+            case '1':
+                await pm.propertyExplorerMenu();
+                break;
 
-        if (pilih === '1') {
-            console.log('\n----Daftar Produk----');
-            const data = await pm.findAll();
-            data.forEach((element, index) => console.log(`${index + 1}. ${element.name} - ${element.price}`));
-            console.log('---------------------\n');
-        }
-        else if (pilih === '2') {
-            const name = await rl.question('Nama produk: ');
-            const price = await Number(rl.question('Harga produk: '));
-            await pm.insertOne(name, price);
-            console.log('Produk ditambahkan!\n');
-        }
-        else if (pilih === '3') {
-            const data = await pm.findAll();
-            console.log(data);
-            const id = await rl.question('Masukan id Yg ingin di update: ');
-            const name = await rl.question('Masukan nama baru: ');
-            const price = await Number(rl.question('Masukan price baru: '));
-            // console.log(typeof(id))
-            const obj_id = new mongodb.ObjectId(id);
+            case '2':
+                await pm.propertyDetailMenu();
+                break;
 
-            await pm.update(obj_id,name,price);
-            console.log(id,'Sudah di Update');
-        }
-        else if (pilih === '4') {
-            const data = await pm.findAll();
-            console.log(data);
+            case '3':
+                await anm.analyticsMenu();
+                break;
 
-            const id = await rl.question('Masukan ID Yang Ingin Dihapus: ');
-            const obj_id = new mongodb.ObjectId(id);
-            await pm.delete(obj_id);
-            console.log(id,'Sudah Dihapus');
+            case '4':
+                while (true) {
+                    console.clear();
+                    console.log('Data Management Menu:\n1. Manage Property\n2. Manage Agent\n3. Manage Location\n4. Back');
+                    const manage = rl.question('Pilih menu: ');
+
+                    switch (manage) {
+                        case '1':
+                            await pm.managementMenu();
+                            break;
+
+                        case '2':
+                            await agm.agentMenu();
+                            break;
+
+                        case '3':
+                            await lm.locationMenu();
+                            break;
+
+                        case '4':
+                            break;
+
+                        default:
+                            console.log('Menu tidak valid');
+                        }
+
+                        if (manage === '4'){
+                            break;
+                        }
+                }
+                break;
+
+            case '5':
+                console.log('Program selesai');
+                process.exit();
+
+            default:
+                console.log('Menu tidak valid');
+
         }
-        else if (pilih === '5') {
-            await db.close();
-            break;
-        }
-        rl.question('Enter Untuk Kembali');
+        rl.question('Enter Untuk Kembali Ke Main Menu');
 
     }
 }

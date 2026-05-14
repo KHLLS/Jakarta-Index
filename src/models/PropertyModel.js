@@ -7,8 +7,8 @@ class PropertyModel{
         this.col = this.client.db(process.env.DB).collection('property');
     }
     
-    async findAll(filter = {}) {
-        return await this.col.find(filter).toArray();
+    async findAll(filter = {},sort = {},limit = 10) {
+        return await this.col.find(filter).sort(sort).limit(limit).toArray();
     }
 
     async findOne(filter = {}){
@@ -32,6 +32,10 @@ class PropertyModel{
           {_id:id},
           {$set : data}
        )
+    }
+
+    async aggregate(agg = []){
+        return await this.col.aggregate(agg).toArray();
     }
 }
 

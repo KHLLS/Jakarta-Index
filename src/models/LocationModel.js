@@ -8,8 +8,8 @@ class LocationModel{
         this.col = this.client.db(process.env.DB).collection('location');
     }
     
-    async findAll(filter = {}) {
-        return await this.col.find(filter).toArray();
+    async findAll(filter = {},limit = 10) {
+        return await this.col.find(filter).limit(limit).toArray();
     }
 
     async findOne(filter = {}){
