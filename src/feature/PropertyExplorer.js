@@ -72,13 +72,4 @@ class PropertyExplorer {
     }
 }
 
-async function test() {
-   let tes = new PropertyExplorer();
-   const result = await tes.sortByLand();
-   console.log(result);
-   process.exit();
-}
-
-test();
-
 module.exports = PropertyExplorer;

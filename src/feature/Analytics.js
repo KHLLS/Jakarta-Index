@@ -70,7 +70,7 @@ class Analytics{
         ])
     }
 
-    async districtComparison(){
+    async cityComparison(){
         return await this.pm.aggregate([
             {
                 $lookup:{
@@ -121,14 +121,5 @@ class Analytics{
         ])
     }
 }
-
-async function test() {
-   let tes = new Analytics();
-   const result = await tes.rankAgent();
-   console.log(result);
-   process.exit();
-}
-
-test();
 
 module.exports = Analytics;

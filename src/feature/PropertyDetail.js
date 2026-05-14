@@ -51,13 +51,4 @@ class PropertyDetail{
     }
 }
 
-async function test() {
-   let tes = new PropertyDetail();
-   const result = await tes.findSimilar(new mongodb.ObjectId('6a044eef6f02700570aad09b'));
-   console.log(result);
-   process.exit();
-}
-
-test();
-
 module.exports = PropertyDetail;

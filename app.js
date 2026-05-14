@@ -1,17 +1,17 @@
 const rl = require('readline-sync');
-const Database = require('./src/Database');
-// const PropertyMenu = require('./src/menu_cli/PropertyMenu');
-// const AnalyticsMenu = require('./src/menu_cli/AnalyticsMenu');
-// const AgentMenu = require('./src/menu_cli/AgentMenu');
-// const LocationMenu = require('./src/menu_cli/LocationMenu');
-const mongodb = require('mongodb');
+// const Database = require('./src/Database');
+const PropertyMenu = require('./src/menu_cli/PropertyMenu');
+const AnalyticsMenu = require('./src/menu_cli/AnalyticsMenu');
+const AgentMenu = require('./src/menu_cli/AgentMenu');
+const LocationMenu = require('./src/menu_cli/LocationMenu');
+// const mongodb = require('mongodb');
 
 async function main() {
     // const db = new Database();
-    // const pm = new PropertyMenu();
-    // const anm = new AnalyticsMenu();
-    // const agm = new AgentMenu();
-    // const lm = new LocationMenu();
+    const pm = new PropertyMenu();
+    const anm = new AnalyticsMenu();
+    const agm = new AgentMenu();
+    const lm = new LocationMenu();
     // await db.connect();
     
     while (true) {
