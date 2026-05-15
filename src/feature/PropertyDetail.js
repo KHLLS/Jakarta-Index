@@ -11,8 +11,9 @@ class PropertyDetail{
     }
 
     async findDetailByID(_id){
+        const id = new mongodb.ObjectId(_id)
         return await this.pm.aggregate([
-            {$match:{'_id':_id}},
+            {$match:{'_id':id}},
             {
                 $lookup:{
                     from:'location',
@@ -35,9 +36,10 @@ class PropertyDetail{
     }
 
     async findSimilar(_id){
-        const prop = await this.pm.findOne({_id});
-        const range_price = prop.price_idr * 10 / 100; 
-        const range_land = prop.land_size_m2 * 10 / 100; 
+        const id = new mongodb.ObjectId(_id)
+        const prop = await this.pm.findOne({_id:id});
+        const range_price = prop.price_idr * 0.10; 
+        const range_land = prop.land_size_m2 * 0.10; 
         return await this.pm.findAll(
             {loc_id:prop.loc_id,
             price_idr : {

@@ -244,7 +244,6 @@ Property Management Menu:
 
                 case '2': {
                     const data = {
-                        _id: rl.question('Property ID: '),
                         title: rl.question('Title: '),
                         price_idr: rl.questionInt('Price: '),
                         bedrooms: rl.questionInt('Bedrooms: '),
@@ -258,6 +257,14 @@ Property Management Menu:
                     };
                     const agent = await this.pe.am.findOne({_id: data.agent_id});
                     const location =await this.pe.lm.findOne({_id: data.loc_id});
+
+                    if (data.price_idr <= 0 || data.bedrooms <= 0 || data.bathrooms <= 0 ||
+                        data.garage < 0 || data.land_size_m2 <= 0 ||data.building_size_m2 <= 0 ||
+                        (data.status !== 'SOLD' && data.status !== 'AVAILABLE')){
+                        printMessage('Input tidak valid');
+                        break;
+                    }
+
 
                     if (!agent) {
                         printMessage('Agent tidak ditemukan');
