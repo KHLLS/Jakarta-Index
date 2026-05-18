@@ -4,7 +4,6 @@ require('dotenv').config();
 class Database {
   constructor() {
     this.client = new mongodb.MongoClient(process.env.MONGO_URL);
-    this.db = null;
   }
 
   async connect() {
