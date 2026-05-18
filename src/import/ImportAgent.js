@@ -1,5 +1,4 @@
 const csv = require('csvtojson');
-const fs = require('fs');
 const AgentModel = require('../models/AgentModel');
 const Database = require('../Database')
 require('dotenv').config();
